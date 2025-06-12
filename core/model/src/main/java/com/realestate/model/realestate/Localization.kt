@@ -10,13 +10,13 @@ package com.realestate.model.realestate
  */
 data class Localization(
     val primary: String,
-    val de: De
+    val locale: Locale
 )
 
 /**
  * Represents the German localization of a real estate property.
  */
-data class De(
+data class Locale(
     val attachments: List<Attachments>,
     val text: Text,
 )

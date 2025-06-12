@@ -14,7 +14,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class LocalizationDto(
     @field:Json(name = "primary") val primary: String,
-    @field:Json(name = "de") val de: DeDto,
+    @field:Json(name = "de") val locale: LocaleDto,
 )
 
 /**
@@ -24,7 +24,7 @@ data class LocalizationDto(
  * @see TextDto
  */
 @JsonClass(generateAdapter = true)
-data class DeDto(
+data class LocaleDto(
     @field:Json(name = "attachments") val attachments: List<AttachmentsDto>,
     @field:Json(name = "text") val text: TextDto
 )
@@ -33,7 +33,7 @@ data class DeDto(
  * Data Transfer Object (DTO) for attachments in localization.
  *
  * @see TextDto
- * @see DeDto
+ * @see LocaleDto
  * @see LocalizationDto
  */
 @JsonClass(generateAdapter = true)
@@ -45,7 +45,7 @@ data class AttachmentsDto(
  * Data Transfer Object (DTO) for text information in localization.
  *
  * @see AttachmentsDto
- * @see DeDto
+ * @see LocaleDto
  * @see LocalizationDto
  */
 @JsonClass(generateAdapter = true)

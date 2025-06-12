@@ -54,8 +54,8 @@ class RealEstateServiceTest : ApiAbstract<RealEstateService>() {
 
                 val localization = listingDto.localization
                 assert(localization.primary == "de")
-                assert(localization.de.attachments[0].url == "https://media2.homegate.ch/listings/heia/104123262/image/6b53db714891bfe2321cc3a6d4af76e1.jpg")
-                assert(localization.de.text.title == "Luxuriöses Einfamilienhaus mit Pool - Musterinserat")
+                assert(localization.locale.attachments[0].url == "https://media2.homegate.ch/listings/heia/104123262/image/6b53db714891bfe2321cc3a6d4af76e1.jpg")
+                assert(localization.locale.text.title == "Luxuriöses Einfamilienhaus mit Pool - Musterinserat")
             }
 
             is Resource.ServerError -> {
