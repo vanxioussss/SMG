@@ -24,6 +24,7 @@ dependencies {
     // Room
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+    testImplementation(libs.androidx.arch.core)
 
     // network
     implementation(libs.retrofit)
@@ -37,10 +38,13 @@ dependencies {
     // Paging
     implementation(libs.androidx.paging.common.android)
     implementation(libs.paging)
+    testImplementation(libs.androidx.paging.testing)
 
     // Testing
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.turbine)
+    testImplementation(libs.core.ktx)
+    testImplementation(libs.robolectric)
 }

@@ -10,7 +10,7 @@ import com.realestate.database.RealEstateDatabase
 import com.realestate.database.entity.ListingEntity
 import com.realestate.database.mapper.toListingEntityList
 import com.realestate.network.datasource.RealEstateNetworkDataSource
-import com.realestate.network.mapper.toListingDtoList
+import com.realestate.network.mapper.mapToListingDtoList
 import com.realestate.network.mapper.toListingModelList
 import retrofit2.HttpException
 import java.io.IOException
@@ -67,7 +67,7 @@ class ListingRemoteMediator @Inject constructor(
                         val results = networkResponse.body.results
 
                         // Convert the ListingDto to ListingEntity
-                        results.toListingDtoList().toListingModelList().toListingEntityList()
+                        results.mapToListingDtoList().toListingModelList().toListingEntityList()
                     } else {
                         emptyList()
                     }
@@ -82,6 +82,9 @@ class ListingRemoteMediator @Inject constructor(
             return MediatorResult.Error(exception)
         } catch (exception: HttpException) {
             // HTTP error
+            return MediatorResult.Error(exception)
+        } catch (exception: Exception) {
+            // Other errors
             return MediatorResult.Error(exception)
         }
     }
