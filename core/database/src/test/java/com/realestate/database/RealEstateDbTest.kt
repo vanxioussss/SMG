@@ -34,4 +34,22 @@ class RealEstateDbTest : DbTest() {
 
         assertEquals(expected.data, (loadResult as PagingSource.LoadResult.Page).data)
     }
+
+    @Test
+    fun clearAllListingsTest() = runTest {
+        val listings = MockDataUtil.mockListingPropertiesList().toListingEntityList()
+        dao.insertAllRealEstateListing(listings)
+        dao.clearAll()
+
+        val pagingSource = dao.getAllRealEstateListings()
+        val loadResult = pagingSource.load(
+            PagingSource.LoadParams.Refresh(
+                key = null,
+                loadSize = 10,
+                placeholdersEnabled = false
+            )
+        )
+
+        assertEquals(emptyList<Any>(), (loadResult as PagingSource.LoadResult.Page).data)
+    }
 }
