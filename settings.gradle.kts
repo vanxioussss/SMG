@@ -11,6 +11,16 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+plugins {
+    id("com.android.settings") version "8.9.1"
+}
+
+android {
+    minSdk = 28
+    compileSdk = 35
+}
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -21,4 +31,10 @@ dependencyResolutionManagement {
 
 rootProject.name = "realestate"
 include(":app")
- 
+include(":core:model")
+include(":core:network")
+include(":core:testing")
+include(":core:database")
+include(":core:data")
+include(":core:common")
+include(":core:domain")
