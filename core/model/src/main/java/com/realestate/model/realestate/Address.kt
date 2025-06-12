@@ -11,5 +11,5 @@ data class Address(
     val locality: String,
     val postalCode: String,
     val region: String,
-    val street: String,
+    val street: String? = null,
 )
