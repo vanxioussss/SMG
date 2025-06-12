@@ -15,5 +15,5 @@ data class AddressDto(
     @field:Json(name = "locality") val locality: String,
     @field:Json(name = "postalCode") val postalCode: String,
     @field:Json(name = "region") val region: String,
-    @field:Json(name = "street") val street: String,
+    @field:Json(name = "street") val street: String? = null,
 )
