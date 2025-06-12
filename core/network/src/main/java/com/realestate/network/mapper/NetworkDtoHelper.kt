@@ -246,7 +246,7 @@ fun Listing.toDto(): ListingDto {
  *
  * @return [ListingDto] instance.
  */
-fun List<ResultDto>.toListingDtoList(): List<ListingDto> = map { it.listingDto }
+fun List<ResultDto>.mapToListingDtoList(): List<ListingDto> = map { it.listingDto }
 
 /**
  * Extension function to convert [ResultDto] to [Listing] model.
