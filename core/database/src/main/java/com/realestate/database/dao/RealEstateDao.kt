@@ -19,4 +19,7 @@ interface RealEstateDao {
 
     @Query("SELECT * FROM realEstateListings ORDER BY id ASC")
     fun getAllRealEstateListings(): PagingSource<Int, ListingEntity>
+
+    @Query("DELETE FROM realEstateListings")
+    suspend fun clearAll()
 }

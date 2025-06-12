@@ -15,6 +15,7 @@ import com.realestate.network.dto.realestate.ListingDto
 import com.realestate.network.dto.realestate.LocaleDto
 import com.realestate.network.dto.realestate.LocalizationDto
 import com.realestate.network.dto.realestate.PriceDto
+import com.realestate.network.dto.realestate.ResultDto
 import com.realestate.network.dto.realestate.TextDto
 
 /**
@@ -238,4 +239,29 @@ fun Listing.toDto(): ListingDto {
         address = address.toDto(),
         localization = localization.toDto()
     )
+}
+
+/**
+ * Extension function to convert [ResultDto] to [ListingDto].
+ *
+ * @return [ListingDto] instance.
+ */
+fun List<ResultDto>.toListingDtoList(): List<ListingDto> = map { it.listingDto }
+
+/**
+ * Extension function to convert [ResultDto] to [Listing] model.
+ *
+ * @return [Listing] model instance.
+ */
+fun List<ListingDto>.toListingModelList(): List<Listing> {
+    return map { it.toModel() }
+}
+
+/**
+ * Extension function to convert a list of [Listing] models to a list of [ListingDto].
+ *
+ * @return List of [ListingDto] instances.
+ */
+fun List<Listing>.toListingDtoList(): List<ListingDto> {
+    return map { it.toDto() }
 }
