@@ -3,16 +3,16 @@ package com.realestate.network.mapper
 import com.realestate.model.realestate.Address
 import com.realestate.model.realestate.Attachments
 import com.realestate.model.realestate.Buy
-import com.realestate.model.realestate.De
 import com.realestate.model.realestate.Listing
+import com.realestate.model.realestate.Locale
 import com.realestate.model.realestate.Localization
 import com.realestate.model.realestate.Price
 import com.realestate.model.realestate.Text
 import com.realestate.network.dto.realestate.AddressDto
 import com.realestate.network.dto.realestate.AttachmentsDto
 import com.realestate.network.dto.realestate.BuyDto
-import com.realestate.network.dto.realestate.DeDto
 import com.realestate.network.dto.realestate.ListingDto
+import com.realestate.network.dto.realestate.LocaleDto
 import com.realestate.network.dto.realestate.LocalizationDto
 import com.realestate.network.dto.realestate.PriceDto
 import com.realestate.network.dto.realestate.TextDto
@@ -165,24 +165,24 @@ fun List<Attachments>.toDtoList(): List<AttachmentsDto> {
 }
 
 /**
- * Extension function to convert [DeDto] to [De] model.
+ * Extension function to convert [LocaleDto] to [Locale] model.
  *
- * @return [De] model instance.
+ * @return [Locale] model instance.
  */
-fun DeDto.toModel(): De {
-    return De(
+fun LocaleDto.toModel(): Locale {
+    return Locale(
         attachments = attachments.toModelList(),
         text = text.toModel()
     )
 }
 
 /**
- * Extension function to convert [De] model to [DeDto].
+ * Extension function to convert [Locale] model to [LocaleDto].
  *
- * @return [DeDto] instance.
+ * @return [LocaleDto] instance.
  */
-fun De.toDto(): DeDto {
-    return DeDto(
+fun Locale.toDto(): LocaleDto {
+    return LocaleDto(
         attachments = attachments.toDtoList(),
         text = text.toDto()
     )
@@ -196,7 +196,7 @@ fun De.toDto(): DeDto {
 fun LocalizationDto.toModel(): Localization {
     return Localization(
         primary = primary,
-        de = de.toModel(),
+        locale = locale.toModel(),
     )
 }
 
@@ -208,7 +208,7 @@ fun LocalizationDto.toModel(): Localization {
 fun Localization.toDto(): LocalizationDto {
     return LocalizationDto(
         primary = primary,
-        de = de.toDto(),
+        locale = locale.toDto(),
     )
 }
 

@@ -3,6 +3,7 @@ package com.realestate.database.dao
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Upsert
 import com.realestate.database.entity.ListingEntity
 
 /**
@@ -13,6 +14,9 @@ import com.realestate.database.entity.ListingEntity
  */
 @Dao
 interface RealEstateDao {
+    @Upsert
+    suspend fun insertAllRealEstateListing(listing: List<ListingEntity>)
+
     @Query("SELECT * FROM realEstateListings ORDER BY id ASC")
-    suspend fun getAllRealEstateListings(): PagingSource<Int, ListingEntity>
+    fun getAllRealEstateListings(): PagingSource<Int, ListingEntity>
 }

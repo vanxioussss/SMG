@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.realestate.database.converters.AttachmentsListConverter
+import com.realestate.database.converters.LocaleEntityConverter
 import com.realestate.database.dao.RealEstateDao
 import com.realestate.database.entity.ListingEntity
 
@@ -19,7 +20,8 @@ import com.realestate.database.entity.ListingEntity
     exportSchema = true
 )
 @TypeConverters(
-    AttachmentsListConverter::class
+    AttachmentsListConverter::class,
+    LocaleEntityConverter::class
 )
 abstract class RealEstateDatabase : RoomDatabase() {
     abstract fun realEstateDao(): RealEstateDao
