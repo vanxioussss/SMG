@@ -9,10 +9,15 @@ android {
     buildFeatures {
         buildConfig = true
     }
+
+    defaultConfig {
+        buildConfigField("String", "BASE_URL", "\"https://private-9f1bb1-homegate3.apiary-mock.com/\"")
+    }
 }
 
 dependencies {
     api(project(":core:model"))
+    api(project(":core:common"))
     testImplementation(project(":core:testing"))
 
     // network
