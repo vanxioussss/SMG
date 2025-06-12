@@ -5,16 +5,12 @@ plugins {
 }
 
 android {
-    namespace = "com.vanluong.realestate"
-    compileSdk = 35
+    namespace = "com.realestate"
 
     defaultConfig {
-        applicationId = "com.vanluong.realestate"
-        minSdk = 28
-        targetSdk = 35
+        applicationId = "com.realestate"
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
