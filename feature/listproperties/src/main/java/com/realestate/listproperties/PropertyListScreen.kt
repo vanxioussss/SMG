@@ -33,11 +33,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -51,9 +51,28 @@ import com.realestate.model.realestate.Listing
  * on 13,June,2025
  */
 @Composable
-fun PropertyListScreen(modifier: Modifier, viewModel: PropertyListViewModel = hiltViewModel()) {
+fun PropertyListRoute(
+    modifier: Modifier = Modifier,
+    viewModel: PropertyListViewModel = hiltViewModel()
+) {
     val propertyUiState by viewModel.propertyListUiState.collectAsStateWithLifecycle()
+    PropertyListScreen(
+        modifier = modifier,
+        propertyUiState = propertyUiState,
+        pagingItem = viewModel.listings.collectAsLazyPagingItems(),
+        bookmarkedIds = viewModel.bookmarkedIds.collectAsStateWithLifecycle().value,
+        onBookmarkClick = { viewModel.bookmarkProperty(it.id) }
+    )
+}
 
+@Composable
+fun PropertyListScreen(
+    modifier: Modifier,
+    propertyUiState: PropertyUiState,
+    pagingItem: LazyPagingItems<Listing>,
+    bookmarkedIds: Set<String>,
+    onBookmarkClick: (Listing) -> Unit
+) {
     Column(modifier = modifier.fillMaxSize()) {
         Text(
             text = "Property Listings",
@@ -65,9 +84,6 @@ fun PropertyListScreen(modifier: Modifier, viewModel: PropertyListViewModel = hi
 
         when (propertyUiState) {
             is PropertyUiState.Success -> {
-                val pagingItem = viewModel.listings.collectAsLazyPagingItems()
-                val bookmarkedIds = viewModel.bookmarkedIds.collectAsStateWithLifecycle()
-
                 LazyColumn(
                     modifier = modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp),
@@ -77,10 +93,8 @@ fun PropertyListScreen(modifier: Modifier, viewModel: PropertyListViewModel = hi
                         pagingItem[index]?.let {
                             PropertyItem(
                                 listing = it,
-                                isBookmarked = bookmarkedIds.value.contains(it.id),
-                                onBookmarkClick = {
-                                    viewModel.bookmarkProperty(it.id)
-                                }
+                                isBookmarked = bookmarkedIds.contains(it.id),
+                                onBookmarkClick = onBookmarkClick
                             )
                         }
                     }
@@ -112,7 +126,7 @@ fun PropertyListScreen(modifier: Modifier, viewModel: PropertyListViewModel = hi
 fun PropertyItem(
     listing: Listing,
     isBookmarked: Boolean,
-    onBookmarkClick: () -> Unit
+    onBookmarkClick: (Listing) -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -131,7 +145,7 @@ fun PropertyItem(
             )
 
             IconButton(
-                onClick = onBookmarkClick,
+                onClick = { onBookmarkClick(listing) },
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(16.dp)
@@ -224,8 +238,14 @@ sealed interface PropertyUiState {
     data class Error(val message: String) : PropertyUiState
 }
 
-@Preview
-@Composable
-fun PropertyItemPreview() {
-    PropertyListScreen(modifier = Modifier.fillMaxSize())
-}
+//@Preview
+//@Composable
+//fun PropertyItemPreview() {
+//    PropertyListScreen(
+//        modifier = Modifier.fillMaxSize(),
+//        propertyUiState = TODO(),
+//        pagingItem = TODO(),
+//        bookmarkedIds = TODO(),
+//        onBookmarkClick = TODO()
+//    )
+//}
