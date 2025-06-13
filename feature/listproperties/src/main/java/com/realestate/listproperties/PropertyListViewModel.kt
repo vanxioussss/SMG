@@ -43,4 +43,12 @@ class PropertyListViewModel @Inject constructor(
             started = SharingStarted.Lazily,
             initialValue = PropertyUiState.Loading
         )
+
+    fun bookmarkProperty(propertyId: String) {
+        viewModelScope.launch {
+            // Logic to bookmark a property
+            // This could involve calling a use case or repository method
+            // For example: propertyRepository.bookmarkProperty(propertyId)
+        }
+    }
 }
