@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -37,6 +38,9 @@ dependencies {
 
     // Glide Compose
     implementation(libs.glide.compose)
+
+    // Serialization
+    implementation(libs.kotlinx.serialization)
 
     // Paging
     implementation(libs.androidx.paging.common.android)
