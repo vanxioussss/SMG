@@ -81,7 +81,7 @@ fun PropertyListScreen(modifier: Modifier, viewModel: PropertyListViewModel = hi
 
                     items(pagingItem.itemCount, key = pagingItem.itemKey { it.id }) { index ->
                         pagingItem[index]?.let {
-                            PropertyItem(listing = it)
+//                            PropertyItem(listing = it)
                         }
                     }
                 }
@@ -110,7 +110,9 @@ fun PropertyListScreen(modifier: Modifier, viewModel: PropertyListViewModel = hi
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun PropertyItem(
-    listing: Listing
+    listing: Listing,
+    isBookmarked: Boolean,
+    onBookmarkClick: () -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -129,7 +131,7 @@ fun PropertyItem(
             )
 
             IconButton(
-                onClick = { },
+                onClick = onBookmarkClick,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(16.dp)
@@ -137,9 +139,9 @@ fun PropertyItem(
                     .size(32.dp)
             ) {
                 Icon(
-                    imageVector = if (true) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                    imageVector = if (isBookmarked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
                     contentDescription = "Favorite",
-                    tint = if (true) Color.Red else Color.Black
+                    tint = if (isBookmarked) Color.Black else Color.Black
                 )
             }
 
