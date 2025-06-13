@@ -54,24 +54,38 @@ class ListingRemoteMediator @Inject constructor(
             }
 
             // Small dataset - returns all listings
-            val networkResponse = networkDataSource.getAllProperties()
-            realEstateDb.withTransaction {
-                // Clear the existing data if refreshing
-                if (loadType == LoadType.REFRESH) {
-                    realEstateDb.realEstateDao().clearAll()
+            when (val networkResponse = networkDataSource.getAllProperties()) {
+                is Resource.DataError -> {
+                    // Handle error case
+                    return MediatorResult.Error(Exception(networkResponse.error))
                 }
 
-                // Insert new listings into the database
-                realEstateDb.realEstateDao().insertAllRealEstateListing(
-                    if (networkResponse is Resource.Success) {
+                is Resource.ServerError -> {
+                    // Handle error case
+                    return MediatorResult.Error(Exception(networkResponse.error.message))
+                }
+
+                is Resource.Loading -> {
+                    // Handle loading state if needed
+                }
+
+                is Resource.Success -> {
+                    // Successfully fetched data
+                    realEstateDb.withTransaction {
+                        // Clear the existing data if refreshing
+                        if (loadType == LoadType.REFRESH) {
+                            realEstateDb.realEstateDao().clearAll()
+                        }
+
+                        // Insert new listings into the database
                         val results = networkResponse.body.results
 
                         // Convert the ListingDto to ListingEntity
-                        results.mapToListingDtoList().toListingModelList().toListingEntityList()
-                    } else {
-                        emptyList()
+                        val entityList =
+                            results.mapToListingDtoList().toListingModelList().toListingEntityList()
+                        realEstateDb.realEstateDao().insertAllRealEstateListing(entityList)
                     }
-                )
+                }
             }
 
             MediatorResult.Success(

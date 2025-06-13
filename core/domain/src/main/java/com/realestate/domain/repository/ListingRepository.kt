@@ -11,5 +11,5 @@ import kotlinx.coroutines.flow.Flow
  * This interface defines the contract for the ListingRepository.
  */
 interface ListingRepository {
-    suspend fun getPropertyListings(page: Int, pageSize: Int): Flow<PagingData<Listing>>
+    fun getPropertyListings(page: Int, pageSize: Int): Flow<PagingData<Listing>>
 }

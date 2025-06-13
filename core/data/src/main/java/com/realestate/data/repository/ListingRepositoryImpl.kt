@@ -26,7 +26,7 @@ class ListingRepositoryImpl @Inject constructor(
     private val realEstateDatabase: RealEstateDatabase
 ) : ListingRepository {
 
-    override suspend fun getPropertyListings(page: Int, pageSize: Int): Flow<PagingData<Listing>> {
+    override fun getPropertyListings(page: Int, pageSize: Int): Flow<PagingData<Listing>> {
         return Pager(
             config = PagingConfig(pageSize = 20),
             remoteMediator = ListingRemoteMediator(realEstateDatabase, networkDataSource),
