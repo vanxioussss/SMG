@@ -23,8 +23,6 @@ dependencies {
 
     // coroutines
     implementation(libs.coroutines.android)
-    testImplementation(libs.coroutines.android)
-    testImplementation(libs.coroutines.test)
 
     // Compose
     implementation(libs.androidx.hilt.navigation.compose)
@@ -49,7 +47,15 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    // Testing
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.turbine)
+    implementation(libs.core.ktx)
+    testImplementation(libs.coroutines.android)
+    testImplementation(libs.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

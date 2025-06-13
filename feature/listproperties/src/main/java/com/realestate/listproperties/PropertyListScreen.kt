@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -26,7 +25,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -40,7 +38,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -48,9 +45,6 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.realestate.listproperties.util.toCurrencySymbol
 import com.realestate.listproperties.util.toReadablePrice
 import com.realestate.model.realestate.Listing
-import com.realestate.testing.util.MockDataUtil
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 
 /**
  * Created by van.luong
@@ -72,16 +66,22 @@ fun PropertyListScreen(modifier: Modifier, viewModel: PropertyListViewModel = hi
         when (propertyUiState) {
             is PropertyUiState.Success -> {
                 val pagingItem = viewModel.listings.collectAsLazyPagingItems()
+                val bookmarkedIds = viewModel.bookmarkedIds.collectAsStateWithLifecycle()
 
                 LazyColumn(
                     modifier = modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-
                     items(pagingItem.itemCount, key = pagingItem.itemKey { it.id }) { index ->
                         pagingItem[index]?.let {
-//                            PropertyItem(listing = it)
+                            PropertyItem(
+                                listing = it,
+                                isBookmarked = bookmarkedIds.value.contains(it.id),
+                                onBookmarkClick = {
+                                    viewModel.bookmarkProperty(it.id)
+                                }
+                            )
                         }
                     }
                 }
@@ -141,7 +141,7 @@ fun PropertyItem(
                 Icon(
                     imageVector = if (isBookmarked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
                     contentDescription = "Favorite",
-                    tint = if (isBookmarked) Color.Black else Color.Black
+                    tint = Color.Black
                 )
             }
 

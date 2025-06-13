@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.realestate.database.RealEstateDatabase
 import com.realestate.database.mapper.toModel
+import com.realestate.datastore.DataStoreDataSource
 import com.realestate.domain.repository.ListingRepository
 import com.realestate.model.realestate.Listing
 import com.realestate.network.datasource.RealEstateNetworkDataSource
@@ -23,6 +24,7 @@ import javax.inject.Inject
 @OptIn(ExperimentalPagingApi::class)
 class ListingRepositoryImpl @Inject constructor(
     private val networkDataSource: RealEstateNetworkDataSource,
+    private val dataStoreDataSource: DataStoreDataSource,
     private val realEstateDatabase: RealEstateDatabase
 ) : ListingRepository {
 
@@ -37,4 +39,11 @@ class ListingRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun toggleBookmark(id: String) {
+        dataStoreDataSource.toggleBookmark(id)
+    }
+
+    override val bookmarkedIds: Flow<Set<String>>
+        get() = dataStoreDataSource.bookmarkedIds
 }
