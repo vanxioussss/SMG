@@ -1,6 +1,8 @@
 package com.realestate.data.di
 
 import com.realestate.data.repository.ListingRepositoryImpl
+import com.realestate.data.util.NetworkMonitor
+import com.realestate.data.util.NetworkStatusTracker
 import com.realestate.domain.repository.ListingRepository
 import dagger.Module
 import dagger.Provides
@@ -13,7 +15,10 @@ import dagger.hilt.components.SingletonComponent
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
+object DataModule {
     @Provides
     fun provideListingRepository(impl: ListingRepositoryImpl): ListingRepository = impl
+
+    @Provides
+    fun provideNetworkStatusTracker(impl: NetworkStatusTracker): NetworkMonitor = impl
 }
