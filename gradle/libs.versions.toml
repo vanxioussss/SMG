@@ -1,5 +1,6 @@
 [versions]
 agp = "8.10.1"
+compose = "1.0.0-beta01"
 kotlin = "2.1.20"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -32,10 +33,15 @@ turbine = "1.2.0"
 coreKtxVersion = "1.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
+androidxLifecycle = "2.8.7"
+androidxHiltNavigationCompose = "1.2.0"
+androidxNavigation = "2.8.5"
+uiTooling = "1.8.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-paging-testing = { module = "androidx.paging:paging-testing", version.ref = "paging" }
+glide-compose = { module = "com.github.bumptech.glide:compose", version.ref = "compose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -55,6 +61,10 @@ androidx-lifecyle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecy
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
+androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
 coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 hilt-android-processor = { group = "com.google.dagger", name = "dagger-android-processor", version.ref = "hiltCore" }
@@ -69,6 +79,7 @@ moshi-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", v
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 okhttp-mockserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttp" }
 paging = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging" }
+paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
@@ -76,8 +87,8 @@ turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine
 core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
 androidx-paging-common-android = { group = "androidx.paging", name = "paging-common-android", version.ref = "paging" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

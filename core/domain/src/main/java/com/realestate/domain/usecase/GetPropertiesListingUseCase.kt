@@ -3,7 +3,9 @@ package com.realestate.domain.usecase
 import androidx.paging.PagingData
 import com.realestate.domain.repository.ListingRepository
 import com.realestate.model.realestate.Listing
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 /**
@@ -15,6 +17,6 @@ import javax.inject.Inject
 class GetPropertiesListingUseCase @Inject constructor(
     private val listingRepository: ListingRepository,
 ) {
-    suspend operator fun invoke(page: Int, pageSize: Int): Flow<PagingData<Listing>> =
-        listingRepository.getPropertyListings(page, pageSize)
+    operator fun invoke(page: Int, pageSize: Int): Flow<PagingData<Listing>> =
+        listingRepository.getPropertyListings(page, pageSize).flowOn(Dispatchers.IO)
 }

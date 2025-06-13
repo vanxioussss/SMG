@@ -33,7 +33,7 @@ object MockDataUtil {
                     locale = Locale(
                         attachments = listOf(Attachments(url = "https://media2.homegate.ch/listings/heia/104123262/image/6b53db714891bfe2321cc3a6d4af76e1.jpg")),
                         text = Text(
-                            title = "Luxurious Apartment in the Heart of the City",
+                            title = "Maison moderne - Annonce exemplaire",
                         )
                     )
                 )
