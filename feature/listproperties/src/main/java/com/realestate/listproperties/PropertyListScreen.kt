@@ -188,7 +188,13 @@ fun PropertyItem(
                                 tint = Color.Gray
                             )
                             Text(
-                                text = "${address.street}, ${address.locality}, ${address.region}",
+                                text = buildString {
+                                    if (!address.street.isNullOrEmpty()) {
+                                        append(address.street)
+                                        append(", ")
+                                    }
+                                    append("${address.locality}, ${address.region}")
+                                },
                                 style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
                                 color = Color.Gray
                             )
