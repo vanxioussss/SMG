@@ -107,6 +107,10 @@ development of this application.
   centralizes navigation and simplifies lifecycle handling across screens.
   Even if there is only one feature now, Navigation will help for future growth of the project.
 
+ - **Offline-first with Pagination and RemoteMediator** \
+   Even though the current API does not support pagination, Paging 3 with RemoteMediator is
+   already integrated into the architecture to ensure offline-first behavior and future scalability.
+
 🚀 Future Improvements
 ---------------
 Some planned or possible enhancements:
