@@ -1,4 +1,4 @@
-package com.realestate.data.util
+package com.realestate.data.util.network
 
 import android.content.Context
 import android.net.ConnectivityManager

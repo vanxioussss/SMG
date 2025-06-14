@@ -18,7 +18,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.realestate.data.util.NetworkMonitor
+import com.realestate.data.util.network.NetworkMonitor
 import com.realestate.navigation.NavGraphHost
 import com.realestate.ui.theme.RealestateTheme
 import dagger.hilt.android.AndroidEntryPoint

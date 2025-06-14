@@ -25,7 +25,9 @@ fun Long.toReadablePrice(): String {
  */
 fun String.toCurrencySymbol(): String {
     return try {
-        Currency.getInstance(this).symbol
+        Currency.getInstance(this).symbol.also {
+            println("Currency symbol for $this: $it")
+        }
     } catch (e: IllegalArgumentException) {
         this // fallback to the original string if invalid
     }
