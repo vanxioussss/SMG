@@ -3,6 +3,10 @@
 
 🎯 **An Android application for real estate listings**
 
+🎥 Demo
+--------------------
+https://github.com/user-attachments/assets/4ecc9d56-2c92-495a-9a91-8d6792093833
+
 📁 Project Structure
 --------------------
 
