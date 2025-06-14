@@ -1,8 +1,8 @@
 package com.realestate.data.di
 
 import com.realestate.data.repository.ListingRepositoryImpl
-import com.realestate.data.util.NetworkMonitor
-import com.realestate.data.util.NetworkStatusTracker
+import com.realestate.data.util.network.NetworkMonitor
+import com.realestate.data.util.network.NetworkStatusTracker
 import com.realestate.domain.repository.ListingRepository
 import dagger.Module
 import dagger.Provides

@@ -8,7 +8,6 @@ import com.realestate.domain.usecase.GetPropertiesListingUseCase
 import com.realestate.domain.usecase.ToggleBookmarkPropertyUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -26,19 +25,13 @@ class PropertyListViewModel @Inject constructor(
     private val toggleBookmarkPropertyUseCase: ToggleBookmarkPropertyUseCase,
     getBookmarkedPropertiesUseCase: GetBookmarkedPropertiesUseCase
 ) : ViewModel() {
+    private val pagingDataFlow = getPropertiesListingUseCase(1, 20).cachedIn(viewModelScope)
+    private val bookmarkedIdsFlow = getBookmarkedPropertiesUseCase()
 
-    val listings = getPropertiesListingUseCase(1, 20)
-        .cachedIn(viewModelScope)
-
-    val bookmarkedIds = getBookmarkedPropertiesUseCase()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.Lazily,
-            initialValue = emptySet()
-        )
-
-    val propertyListUiState: StateFlow<PropertyUiState> = listings
-        .map { PropertyUiState.Success }
+    val propertyListUiState = bookmarkedIdsFlow
+        .map { bookmarkedIds ->
+            PropertyUiState.Success(pagingDataFlow, bookmarkedIds)
+        }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Lazily,

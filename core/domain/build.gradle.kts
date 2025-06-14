@@ -10,7 +10,6 @@ android {
 
 dependencies {
     api(project(":core:model"))
-//    api(project(":core:data"))
     testImplementation(project(":core:testing"))
 
     implementation(libs.javax.inject)

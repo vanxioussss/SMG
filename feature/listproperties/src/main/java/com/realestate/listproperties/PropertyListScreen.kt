@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.paging.compose.LazyPagingItems
+import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -45,6 +45,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.realestate.listproperties.util.toCurrencySymbol
 import com.realestate.listproperties.util.toReadablePrice
 import com.realestate.model.realestate.Listing
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by van.luong
@@ -59,8 +60,6 @@ fun PropertyListRoute(
     PropertyListScreen(
         modifier = modifier,
         propertyUiState = propertyUiState,
-        pagingItem = viewModel.listings.collectAsLazyPagingItems(),
-        bookmarkedIds = viewModel.bookmarkedIds.collectAsStateWithLifecycle().value,
         onBookmarkClick = { viewModel.bookmarkProperty(it.id) }
     )
 }
@@ -69,8 +68,6 @@ fun PropertyListRoute(
 fun PropertyListScreen(
     modifier: Modifier,
     propertyUiState: PropertyUiState,
-    pagingItem: LazyPagingItems<Listing>,
-    bookmarkedIds: Set<String>,
     onBookmarkClick: (Listing) -> Unit
 ) {
     Column(modifier = modifier.fillMaxSize()) {
@@ -84,6 +81,9 @@ fun PropertyListScreen(
 
         when (propertyUiState) {
             is PropertyUiState.Success -> {
+                val pagingItem = propertyUiState.pagingDataFlow.collectAsLazyPagingItems()
+                val bookmarkedIds = propertyUiState.bookmarkedIds
+
                 LazyColumn(
                     modifier = modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp),
@@ -222,8 +222,14 @@ fun PropertyItem(
 sealed interface PropertyUiState {
     /**
      * Represents a successful state with a list of property listings.
+     *
+     * @property pagingDataFlow A flow of paging data containing the property listings.
+     * @property bookmarkedIds A set of bookmarked property IDs.
      */
-    data object Success : PropertyUiState
+    data class Success(
+        val pagingDataFlow: Flow<PagingData<Listing>>,
+        val bookmarkedIds: Set<String> = emptySet()
+    ) : PropertyUiState
 
     /**
      * Represents a loading state.
