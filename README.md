@@ -57,7 +57,7 @@ https://github.com/user-attachments/assets/4ecc9d56-2c92-495a-9a91-8d6792093833
 --------------
 
 In case you can't build the project, \
-here is the [Link](https://drive.google.com/drive/folders/1Aef3Jh4wvbM1zvUpDmRSg0SkLymbKJL2?usp=sharing) to the APK file.
+Check the release [here](https://github.com/vanxioussss/SMG/releases/tag/v1.0.0)
 
 🛠️ Tech Stack
 --------------
