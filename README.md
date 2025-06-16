@@ -5,7 +5,7 @@
 
 🎥 Demo
 --------------------
-https://github.com/user-attachments/assets/4ecc9d56-2c92-495a-9a91-8d6792093833
+https://github.com/user-attachments/assets/c867abcb-a84d-4bb4-a5e5-c6352b5a8092
 
 📁 Project Structure
 --------------------
